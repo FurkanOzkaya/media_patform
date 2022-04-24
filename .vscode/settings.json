@@ -9,7 +9,8 @@
     "python.linting.enabled": true,
     "python.linting.pylintArgs": [
         "--load-plugins=pylint_django",
-        "--errors-only"
+        "--errors-only",
+        "--django-settings-module=media_platform.settings",
     ],
     "editor.formatOnSave": true,
     "files.exclude": {

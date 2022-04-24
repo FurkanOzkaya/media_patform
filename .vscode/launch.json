@@ -33,7 +33,7 @@
             "program": "${workspaceFolder}\\manage.py",
             "args": [
                 "test",
-                "."
+                "--settings=media_platform.test.test_settings"
             ],
             "django": true,
             "justMyCode": true

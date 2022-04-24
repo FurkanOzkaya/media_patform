@@ -19,20 +19,6 @@ jobs:
           - db: postgres
             db_port: 5432
     
-    services:
-      postgres:
-        image: postgres:10
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_HOST_AUTH_METHOD: trust
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-    
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
@@ -43,15 +29,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Install PostgreSQL client
-      run: |
-        apt-get install --yes postgresql-client
-    - name: Create Database
-      run: psql -f init.sql postgresql://postgres:postgres@localhost:5432/postgres
     - name: Prepare DB
       run: |
-        python manage.py makemigrations
-        python manage.py migrate
+        python manage.py makemigrations --settings=media_platform.test.test_settings
+        python manage.py migrate --settings=media_platform.test.test_settings
     - name: Run Tests
       run: |
-        python manage.py test
+        python manage.py test --settings=media_platform.test.test_settings

@@ -1,5 +1,7 @@
 # Media Platform
 
+[![MediaPlatform CI](https://github.com/FurkanOzkaya/media_platform/actions/workflows/django.yml/badge.svg?branch=master)](https://github.com/FurkanOzkaya/media_platform/actions/workflows/django.yml)
+
 ## API's
 - [GET]  /api/v1/all-info/            
 --> Retrieve all Channels, SubChannels and Contents
@@ -19,6 +21,9 @@
 --> Run Coverage and Coverage Report
 - init.sql        
 --> Database creation for docker-compose
+- run_pylint.sh        
+--> Pylint report for repository
+
 
 # [Django-Admin Commands](https://furkanozkaya.com/software-languages/python/django/django-admin-komut-olusturma/)
 - generate_report   

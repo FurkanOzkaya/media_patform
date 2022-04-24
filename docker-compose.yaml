@@ -1,0 +1,36 @@
+version: "3"
+services:
+    backend:
+        build: .
+        restart: always
+        ports:
+            - 8000:8000
+        environment:
+            PYTHONUNBUFFERED: 0
+            POSTGRESS_HOST: database
+        links:
+            - "database:database"
+        depends_on:
+            - database
+        networks:
+            - backend-network
+        volumes: 
+            - ../datas/media:/media
+            - ../datas/static:/static
+    database:
+        image: postgres
+        container_name: database
+        restart: always
+        environment:
+            - "POSTGRES_HOST_AUTH_METHOD=trust"
+        ports:
+            - 5432:5432
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+            - ../datas/db:/var/lib/postgresql/data
+        networks:
+            - backend-network
+
+networks:
+    backend-network:
+        driver: bridge

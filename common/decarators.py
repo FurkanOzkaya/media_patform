@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-def validator(type="default", validator=None, path_validator=None):
+def validatorV1(request_type="default", validator=None, path_validator=None):
     def inner_validator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -18,9 +18,9 @@ def validator(type="default", validator=None, path_validator=None):
                 print(
                     "Validator Decorator return - 400 - validator not sent to funtion")
                 return Response(status=status.HTTP_400_BAD_REQUEST)
-            if type == "query_string":
+            if request_type == "query_string":
                 serializer = validator(data=request.GET)
-            elif type == "body":
+            elif request_type == "body":
                 serializer = validator(data=request.data)
             else:
                 serializer = None

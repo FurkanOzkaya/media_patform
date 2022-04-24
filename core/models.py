@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-# Create your models here.
 from django.db.models import Avg
 
 
@@ -28,7 +27,7 @@ class Channel(models.Model):
 
     @property
     def average_rating(self):
-        if hasattr(self, 'sub_channels') and self.sub_channels:
+        if hasattr(self, 'sub_channels') and self.sub_channels:  # pylint: disable=E1101
             list_sub_channels = self.sub_channels.all()
             if list(list_sub_channels):
                 channel_rating_list = []

@@ -1,0 +1,1 @@
+pylint $(git ls-files '*.py') --load-plugins pylint_django --errors-only --django-settings-module=media_platform.settings --reports=yes

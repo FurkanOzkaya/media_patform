@@ -1,5 +1,4 @@
 import json
-from random import random
 
 from rest_framework import status
 from core.models import Channel

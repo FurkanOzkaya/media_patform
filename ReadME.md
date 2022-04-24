@@ -5,9 +5,9 @@
 --> Retrieve all Channels, SubChannels and Contents
 - [GET]  /api/v1/channel/             
 --> Retrieve Channels
-- [GET]  /api/v1/sub-channel/<id>     
+- [GET]  /api/v1/sub-channel/{id}     
 --> Retrieve SubChannell which connected to given id
-- [GET]  /api/v1/contents/<id>        
+- [GET]  /api/v1/contents/{id}        
 --> Retrieve Contents of given SubChannel or Channel id
 
 ## Scripts

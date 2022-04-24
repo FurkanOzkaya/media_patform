@@ -48,6 +48,7 @@ Model Helps to calculate all average_ratings and then we just pointing it in ser
 ```
 docker-compose up
 ```
+Restart Backend after you see database is ready to accept connections log on console.
 
 ## Docker  Manual
 

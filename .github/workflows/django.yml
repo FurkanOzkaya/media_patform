@@ -45,7 +45,6 @@ jobs:
         pip install -r requirements.txt
     - name: Install PostgreSQL client
       run: |
-        apt-get update
         apt-get install --yes postgresql-client
     - name: Create Database
       run: psql -f init.sql postgresql://postgres:postgres@localhost:5432/postgres

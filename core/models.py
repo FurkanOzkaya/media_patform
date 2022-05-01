@@ -27,6 +27,8 @@ class Channel(models.Model):
 
     @property
     def average_rating(self):
+        if hasattr(self, 'rating'):
+            return getattr(self, "rating")
         if hasattr(self, 'sub_channels') and self.sub_channels:  # pylint: disable=E1101
             list_sub_channels = self.sub_channels.all()
             if list(list_sub_channels):
@@ -37,9 +39,12 @@ class Channel(models.Model):
                 sub_rating = sum(channel_rating_list) / len(channel_rating_list)
                 contents_rating = self.contents.aggregate(Avg('rating'))
                 if contents_rating["rating__avg"] and sub_rating:
+                    self.rating = {"rating__avg": ((float(sub_rating) + float(contents_rating["rating__avg"])) / 2)}
                     return {"rating__avg": ((float(sub_rating) + float(contents_rating["rating__avg"])) / 2)}
                 if sub_rating:
+                    self.rating = {"rating__avg": sub_rating}
                     return {"rating__avg": sub_rating}
+        self.rating = self.contents.aggregate(Avg('rating'))
         return self.contents.aggregate(Avg('rating'))
 
 
